@@ -12,6 +12,11 @@ res.render('home')
 
 })
 
+app.get('/vaga', (req, res) => {
+
+    res.render('vaga')
+    
+    })
 
 app.listen(3000, (err) => {
     if(err){
