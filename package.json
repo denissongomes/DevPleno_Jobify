@@ -1,7 +1,7 @@
 {
   "name": "devpleno_jobify",
   "version": "1.0.0",
-  "description": "DevPleno_Jobify",
+  "description": "Jobify is a simple job board for sites. This project was created as part of the DevPleno - FullStack Master Training",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/denissongomes/DevPleno_Jobify/issues"
   },
-  "homepage": "https://github.com/denissongomes/DevPleno_Jobify#readme"
+  "homepage": "https://github.com/denissongomes/DevPleno_Jobify#readme",
+  "dependencies": {
+    "ejs": "^3.1.5",
+    "express": "^4.17.1"
+  }
 }
