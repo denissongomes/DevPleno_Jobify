@@ -5,7 +5,7 @@ app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => {
 
-res.send('Olá Fullstack Lab!')
+res.render('home')
 
 })
 
