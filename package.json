@@ -1,0 +1,19 @@
+{
+  "name": "devpleno_jobify",
+  "version": "1.0.0",
+  "description": "DevPleno_Jobify",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/denissongomes/DevPleno_Jobify.git"
+  },
+  "author": "Denisson Gomes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/denissongomes/DevPleno_Jobify/issues"
+  },
+  "homepage": "https://github.com/denissongomes/DevPleno_Jobify#readme"
+}
