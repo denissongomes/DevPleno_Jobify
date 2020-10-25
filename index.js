@@ -14,9 +14,20 @@ const dbConnection = new sqlite3.Database('./database.sqlite', (err) => {
   });
   
 
-app.get('/', (req, res) => {
-
-res.render('home')
+app.get('/', async(req, res) => {
+     
+        const db = dbConnection
+        const sql = "SELECT * FROM categorias ORDER BY id"
+        
+        db.all(sql, [], (err, categorias) => {
+           
+            res.render("home", { 
+                categorias   
+            });
+         
+        });
+       
+   
 
 })
 
@@ -30,10 +41,10 @@ app.get('/vaga', (req, res) => {
         const db =  await dbConnection
     await db.run('create table if not exists categorias (id INTEGER PRIMARY KEY, categoria TEXT);')
     await db.run('create table if not exists vagas (id INTEGER PRIMARY KEY, categoria INTEGER, titulo TEXT, descricao TEXT);')
-    const categoria1 = 'Engineering Team'
-    await db.run(`insert into categorias(categoria) values('${categoria1}')`) 
-    const categoria2 = 'Marketing Team'
-    await db.run(`insert into categorias(categoria) values('${categoria2}')`) //use temlate string (`)para adicionar variáveis à expressão sql
+    // const categoria1 = 'Engineering Team'
+    // await db.run(`insert into categorias(categoria) values('${categoria1}')`) 
+    // const categoria2 = 'Marketing Team'
+    // await db.run(`insert into categorias(categoria) values('${categoria2}')`) //use temlate string (`)para adicionar variáveis à expressão sql
     }
 init()
 
