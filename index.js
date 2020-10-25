@@ -32,12 +32,12 @@ app.get('/vaga', (req, res) => {
    const db =  await dbConnection
     await db.run('create table if not exists categorias (id INTEGER PRIMARY KEY, categoria TEXT);')
     await db.run('create table if not exists vagas (id INTEGER PRIMARY KEY, categoria INTEGER, titulo TEXT, descricao TEXT);')
-    // const categoria = 'Engineering Team'
+    // const categoria = 'Social Media'
     // await db.run(`insert into categorias(categoria) values('${categoria}')`) 
-      //const vaga = 'Social Media'
-     // const descricao = 'Vaga disponível para Fullstack Developer para quem fez o Fullstack Lab'
-    // await db.run(`insert into vagas(categoria, titulo, descricao) values(1, '${vaga1}', '${descricao1}')`) //use temlate string (`)para adicionar variáveis à expressão sql
-    
+    // const vaga = 'Social Media'
+    //const descricao = 'Vaga disponível para Social Media para quem fez o Fullstack Lab'
+    // await db.run(`insert into vagas(categoria, titulo, descricao) values(1, '${vaga}', '${descricao}')`) //use temlate string (`)para adicionar variáveis à expressão sql
+    //db.run("UPDATE vagas SET categoria = 3 WHERE (id = 3);");
     }
 init()
 
