@@ -41,10 +41,15 @@ app.get('/vaga', (req, res) => {
         const db =  await dbConnection
     await db.run('create table if not exists categorias (id INTEGER PRIMARY KEY, categoria TEXT);')
     await db.run('create table if not exists vagas (id INTEGER PRIMARY KEY, categoria INTEGER, titulo TEXT, descricao TEXT);')
-    // const categoria1 = 'Engineering Team'
-    // await db.run(`insert into categorias(categoria) values('${categoria1}')`) 
-    // const categoria2 = 'Marketing Team'
-    // await db.run(`insert into categorias(categoria) values('${categoria2}')`) //use temlate string (`)para adicionar variáveis à expressão sql
+    // const categoria = 'Engineering Team'
+    // await db.run(`insert into categorias(categoria) values('${categoria}')`) 
+    const vaga1 = 'Fullstack Developer (Remote)'
+    const descricao1 = 'Vaga disponível para Fullstack Developer para quem fez o Fullstack Lab'
+    await db.run(`insert into vagas(categoria, titulo, descricao) values(1, '${vaga1}', '${descricao1}')`) //use temlate string (`)para adicionar variáveis à expressão sql
+   const vaga2 = 'Marketing Manager (San Francisco)'
+   const descricao2 = 'Vaga disponível para Marketing Manager em San Francisco para quem fez o Fullstack Lab'
+   await db.run(`insert into vagas(categoria, titulo, descricao) values(2, '${vaga2}', '${descricao2}')`) //use temlate string (`)para adicionar variáveis à expressão sql
+  // db.run("UPDATE Categorias SET categoria = 'Marketing Team' WHERE (id = 2);");
     }
 init()
 
