@@ -28,8 +28,12 @@ app.get('/vaga', (req, res) => {
 
  const init = async() => {
         const db =  await dbConnection
-        db.run('create table if not exists categorias (id INTEGER PRIMARY KEY, categoria TEXT);')
-        db.run('create table if not exists vagas (id INTEGER PRIMARY KEY, categoria INTEGER, titulo TEXT, descricao TEXT);')
+    await db.run('create table if not exists categorias (id INTEGER PRIMARY KEY, categoria TEXT);')
+    await db.run('create table if not exists vagas (id INTEGER PRIMARY KEY, categoria INTEGER, titulo TEXT, descricao TEXT);')
+    const categoria1 = 'Engineering Team'
+    await db.run(`insert into categorias(categoria) values('${categoria1}')`) 
+    const categoria2 = 'Marketing Team'
+    await db.run(`insert into categorias(categoria) values('${categoria2}')`) //use temlate string (`)para adicionar variáveis à expressão sql
     }
 init()
 
