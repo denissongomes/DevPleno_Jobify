@@ -5,6 +5,14 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
 
+const sqlite3 = require('sqlite3').verbose();
+const dbConnection = new sqlite3.Database('./database.sqlite', (err) => {
+    if (err) {
+      console.error(err.message);
+    }
+    //console.log('Connected to the database.');
+  });
+  
 
 app.get('/', (req, res) => {
 
@@ -17,6 +25,9 @@ app.get('/vaga', (req, res) => {
     res.render('vaga')
     
     })
+
+
+
 
 app.listen(3000, (err) => {
     if(err){
