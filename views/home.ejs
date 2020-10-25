@@ -1,14 +1,13 @@
     <%- include('header') %>
-    <% categorias.forEach( categoria => { %>
-        <%- categoria.id %>
-    <% }) %> 
     <h2>Open Roles:</h2>
+    <% categorias.forEach( categoria => { %>
     <div>
-        <h3>Engineering Team</h3>
+        <h3><%- categoria.categoria %></h3>
      <ul>
          <li><a href="vaga">Fulltack Developer (Remote)</a></li>
      </ul>
     </div>
+    <% }) %>
     <div>
         <h3>Marketing Team</h3>
      <ul>
