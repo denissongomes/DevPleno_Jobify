@@ -18,6 +18,7 @@
   "homepage": "https://github.com/denissongomes/DevPleno_Jobify#readme",
   "dependencies": {
     "ejs": "^3.1.5",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "sqlite": "^4.0.15"
   }
 }
