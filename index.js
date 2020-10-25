@@ -26,7 +26,12 @@ app.get('/vaga', (req, res) => {
     
     })
 
-
+ const init = async() => {
+        const db =  await dbConnection
+        db.run('create table if not exists categorias (id INTEGER PRIMARY KEY, categoria TEXT);')
+        db.run('create table if not exists vagas (id INTEGER PRIMARY KEY, categoria INTEGER, titulo TEXT, descricao TEXT);')
+    }
+init()
 
 
 app.listen(3000, (err) => {
