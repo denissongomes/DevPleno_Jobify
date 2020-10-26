@@ -12,22 +12,30 @@ const dbConnection = new sqlite3.Database('./database.sqlite', (err) => {
     //console.log('Connected to the database.');
   });
   
-app.get('/', async(req, res) => {
+app.get('/', (req, res) => {
     const db = dbConnection
     const sql  = "SELECT * FROM vagas INNER JOIN categorias ON vagas.id = categorias.id ORDER BY id"
-    await db.all(sql, [], (err, results) => {    
+    db.all(sql, [], (err, results) => {    
         res.render("home", { 
             results 
         });
-    });  
+    }); 
+
 })
 
-app.get('/vaga', (req, res) => {
-
-    res.render('vaga')
+app.get('/vaga/:id', async(req, res) => {
+    const db = await dbConnection
+    const sql = "SELECT * FROM vagas WHERE id = ?";
+    db.get(sql, [req.params.id], (err, row) => {
+        if (err) {
+          return console.error(err.message);
+        }
+        res.render("vaga", { 
+            vaga: row 
+        });
+    });
     
-    })
-
+})
  const init = async() => {
    const db =  await dbConnection
     await db.run('create table if not exists categorias (id INTEGER PRIMARY KEY, categoria TEXT);')
@@ -40,6 +48,7 @@ app.get('/vaga', (req, res) => {
     //db.run("UPDATE vagas SET categoria = 3 WHERE (id = 3);");
     }
 init()
+
 
 app.listen(3000, (err) => {
     if(err){
