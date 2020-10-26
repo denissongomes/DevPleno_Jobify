@@ -36,6 +36,11 @@ app.get('/vaga/:id', async(req, res) => {
     });
     
 })
+
+app.get('/admin', (req,res) => {
+    res.render('admin/home')
+})
+
  const init = async() => {
    const db =  await dbConnection
     await db.run('create table if not exists categorias (id INTEGER PRIMARY KEY, categoria TEXT);')
