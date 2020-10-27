@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-
+const bodyParser = require('body-parser')
 
 const sqlite3 = require('sqlite3').verbose();
 const dbConnection = new sqlite3.Database('./database.sqlite', (err) => {
@@ -12,7 +12,7 @@ const dbConnection = new sqlite3.Database('./database.sqlite', (err) => {
   
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
-
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => {
     const db = dbConnection
