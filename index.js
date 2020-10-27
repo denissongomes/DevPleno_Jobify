@@ -1,17 +1,19 @@
 const express = require('express')
 const app = express()
-
-app.set('view engine', 'ejs')
-app.use(express.static('public'))
+)
 
 const sqlite3 = require('sqlite3').verbose();
 const dbConnection = new sqlite3.Database('./database.sqlite', (err) => {
     if (err) {
       console.error(err.message);
     }
-    //console.log('Connected to the database.');
+//console.log('Connected to the database.');
   });
   
+app.set('view engine', 'ejs')
+app.use(express.static('public'))
+
+
 app.get('/', (req, res) => {
     const db = dbConnection
     const sql  = "SELECT * FROM vagas INNER JOIN categorias ON vagas.id = categorias.id ORDER BY id"
@@ -58,10 +60,14 @@ app.get('/admin/vagas/delete/:id', async(req, res) => {
     res.redirect('/admin/vagas')
 })
 
-
 app.get('/admin/vagas/nova', async(req, res) => {
     res.render('admin/nova-vaga')
 })
+
+app.post('/admin/vagas/nova',async(req, res) => {
+   res.send(req.body.titulo)
+})
+
  const init = async() => {
    const db =  await dbConnection
     await db.run('create table if not exists categorias (id INTEGER PRIMARY KEY, categoria TEXT);')
