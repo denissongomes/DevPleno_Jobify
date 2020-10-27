@@ -19,3 +19,22 @@ h2 {
     padding: 6px;
 }
 p { text-align:center;}
+
+/* Form nova vaga */
+label {
+    display: block;
+    margin: 20px 0 4px 0
+}
+input,select {
+    display: block;
+    padding: 4px;
+    width: 540px
+}
+textarea {
+    padding: 5px;
+    width: 540px;
+    height: 240px;
+}
+button {
+    padding: 12px;
+}
