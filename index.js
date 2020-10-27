@@ -61,7 +61,14 @@ app.get('/admin/vagas/delete/:id', async(req, res) => {
 })
 
 app.get('/admin/vagas/nova', async(req, res) => {
-    res.render('admin/nova-vaga')
+    const db = dbConnection
+    const sql  = "SELECT * FROM categorias"
+    db.all(sql, [], (err, categorias) => {    
+        res.render("admin/nova-vaga", { 
+            categorias 
+        });
+    }); 
+   
 })
 
 app.post('/admin/vagas/nova',async(req, res) => {
