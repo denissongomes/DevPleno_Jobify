@@ -52,12 +52,16 @@ app.get('/admin/vagas', (req,res) => {
  
 })
 
-app.get('/admin/vagas/delete/:id', async(req,res) => {
+app.get('/admin/vagas/delete/:id', async(req, res) => {
     const db =  await dbConnection
     await db.run('DELETE FROM vagas WHERE id = '+req.params.id+'')
     res.redirect('/admin/vagas')
 })
 
+
+app.get('/admin/vagas/nova', async(req, res) => {
+    res.render('admin/nova-vaga')
+})
  const init = async() => {
    const db =  await dbConnection
     await db.run('create table if not exists categorias (id INTEGER PRIMARY KEY, categoria TEXT);')
