@@ -65,7 +65,10 @@ app.get('/admin/vagas/nova', async(req, res) => {
 })
 
 app.post('/admin/vagas/nova',async(req, res) => {
-   res.send(req.body.titulo)
+    const db =  await dbConnection
+    const {titulo, descricao, categoria}  = req.body
+    await db.run(`insert into vagas(categoria, titulo, descricao) values('${categoria}', '${titulo}', '${descricao}')`) //use temlate string (`)para adicionar variáveis à expressão sql
+    res.redirect('/admin/vagas')
 })
 
  const init = async() => {
@@ -74,9 +77,7 @@ app.post('/admin/vagas/nova',async(req, res) => {
     await db.run('create table if not exists vagas (id INTEGER PRIMARY KEY, categoria INTEGER, titulo TEXT, descricao TEXT);')
     // const categoria = 'Social Media'
     // await db.run(`insert into categorias(categoria) values('${categoria}')`) 
-    // const vaga = 'Social Media'
-    //const descricao = 'Vaga disponível para Social Media para quem fez o Fullstack Lab'
-    // await db.run(`insert into vagas(categoria, titulo, descricao) values(1, '${vaga}', '${descricao}')`) //use temlate string (`)para adicionar variáveis à expressão sql
+   
     //db.run("UPDATE vagas SET categoria = 3 WHERE (id = 3);");
     }
 init()
