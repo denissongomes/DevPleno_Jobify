@@ -41,7 +41,7 @@ app.get('/admin', (req,res) => {
     res.render('admin/home')
 })
 
-app.get('/admin/vagas', async(req,res) => {
+app.get('/admin/vagas', (req,res) => {
     const db = dbConnection
     const sql  = "SELECT * FROM vagas INNER JOIN categorias ON vagas.id = categorias.id ORDER BY id"
     db.all(sql, [], (err, results) => {    
@@ -51,6 +51,13 @@ app.get('/admin/vagas', async(req,res) => {
     }); 
  
 })
+
+app.get('/admin/vagas/delete/:id', async(req,res) => {
+    const db =  await dbConnection
+    await db.run('DELETE FROM vagas WHERE id = '+req.params.id+'')
+    res.redirect('/admin/vagas')
+})
+
  const init = async() => {
    const db =  await dbConnection
     await db.run('create table if not exists categorias (id INTEGER PRIMARY KEY, categoria TEXT);')
