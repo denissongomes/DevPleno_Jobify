@@ -68,7 +68,6 @@ app.get('/admin/vagas/nova', async(req, res) => {
             categorias 
         });
     }); 
-   
 })
 
 app.post('/admin/vagas/nova',async(req, res) => {
@@ -76,6 +75,16 @@ app.post('/admin/vagas/nova',async(req, res) => {
     const {titulo, descricao, categoria}  = req.body
     await db.run(`insert into vagas(categoria, titulo, descricao) values('${categoria}', '${titulo}', '${descricao}')`) //use temlate string (`)para adicionar variáveis à expressão sql
     res.redirect('/admin/vagas')
+})
+
+app.get('/admin/vagas/editar/:id', async(req, res) => {
+    const db = dbConnection
+    const sql  = "SELECT * FROM categorias"
+    db.all(sql, [], (err, categorias) => {    
+        res.render("admin/editar-vaga", { 
+            categorias 
+        });
+    }); 
 })
 
  const init = async() => {
