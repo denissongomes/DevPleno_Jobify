@@ -87,6 +87,14 @@ app.get('/admin/vagas/editar/:id', async(req, res) => {
     }); 
 })
 
+app.post('/admin/vagas/editar/:id',async(req, res) => {
+    const db =  await dbConnection
+    const {titulo, descricao, categoria}  = req.body
+    const { id } = req.params
+    await db.run(`UPDATE vagas set categoria='${categoria}', titulo='${titulo}', descricao='${descricao}' WHERE id='${id}'`) //use temlate string (`)para adicionar variáveis à expressão sql
+    res.redirect('/admin/vagas')
+})
+
  const init = async() => {
    const db =  await dbConnection
     await db.run('create table if not exists categorias (id INTEGER PRIMARY KEY, categoria TEXT);')
