@@ -1,9 +1,10 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
+const path = require('path')
 
 const sqlite3 = require('sqlite3').verbose();
-const dbConnection = new sqlite3.Database('./database.sqlite', (err) => {
+const dbConnection = new sqlite3.Database(path.resolve(__dirname,'database.sqlite'), (err) => {
     if (err) {
       console.error(err.message);
     }
@@ -13,7 +14,8 @@ const dbConnection = new sqlite3.Database('./database.sqlite', (err) => {
 const port = process.env.PORT || 3000
 
 app.set('view engine', 'ejs')
-app.use(express.static('public'))
+app.set('views', path.join(__dirname, 'views'))
+app.use(express.static(path.join(__dirname,'public')))
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get('/', async(req,res) => {
