@@ -51,8 +51,8 @@ app.get('/admin/vagas', (req,res) => {
             results 
         });
     }); 
- 
 })
+
 
 app.get('/admin/vagas/delete/:id', async(req, res) => {
     const db =  await dbConnection
@@ -97,6 +97,17 @@ app.post('/admin/vagas/editar/:id',async(req, res) => {
     const { id } = req.params
     await db.run(`UPDATE vagas set categoria='${categoria}', titulo='${titulo}', descricao='${descricao}' WHERE id='${id}'`) //use temlate string (`)para adicionar variáveis à expressão sql
     res.redirect('/admin/vagas')
+})
+
+app.get('/admin/categorias', (req,res) => {
+    const db = dbConnection
+    const sql  = "SELECT * FROM categorias"
+    db.all(sql, [], (err, categorias) => {    
+        res.render("admin/categorias", { 
+            categorias 
+        });
+    }); 
+ 
 })
 
  const init = async() => {
