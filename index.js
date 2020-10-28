@@ -1,7 +1,8 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
-const path = require('path')
+const path = require('path');
+const { hostname } = require('os');
 
 const sqlite3 = require('sqlite3').verbose();
 const dbConnection = new sqlite3.Database(path.resolve(__dirname,'database.sqlite'), (err) => {
@@ -12,6 +13,14 @@ const dbConnection = new sqlite3.Database(path.resolve(__dirname,'database.sqlit
   });
   
 const port = process.env.PORT || 3000
+
+app.use('/admin', (req, res, next) => {
+    if( req.hostname === 'localhost' ){
+        next()
+    }  else {
+        res.send('Sorry, You Are Not Allowed to Access This Page')
+    }
+})
 
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
