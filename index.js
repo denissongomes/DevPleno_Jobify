@@ -53,7 +53,7 @@ app.get('/admin', (req,res) => {
 
 app.get('/admin/vagas', (req,res) => {
     const db = dbConnection
-    const sql  = "SELECT * FROM vagas INNER JOIN categorias ON vagas.id = categorias.id ORDER BY id"
+    const sql  = "SELECT * FROM vagas"
     db.all(sql, [], (err, results) => {    
         res.render("admin/vagas", { 
             results 
