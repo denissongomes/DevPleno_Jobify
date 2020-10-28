@@ -14,16 +14,25 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.get('/', (req, res) => {
-    const db = dbConnection
-    const sql  = "SELECT * FROM vagas INNER JOIN categorias ON vagas.id = categorias.id ORDER BY id"
-    db.all(sql, [], (err, results) => {    
-        res.render("home", { 
-            results 
-        });
-    }); 
-
-})
+app.get('/', async(req,res) => {
+    const db = await dbConnection
+    const sqlCategorias  =  "SELECT * FROM categorias"
+    const sqlVagas  = "SELECT * FROM vagas"
+    db.all(sqlCategorias, [], (err, categoriasDb) => {  
+        db.all(sqlVagas, function(err, vagas) { 
+            const categorias = categoriasDb.map(cat => {
+                return{ 
+                    ...cat,
+                    vagas: vagas.filter( vaga => vaga.categoria === cat.id)
+                }
+            })
+           console.log(categorias)
+            res.render('home', {
+                    categorias
+            })
+        })  
+    }) 
+}) 
 
 app.get('/vaga/:id', async(req, res) => {
     const db = await dbConnection
@@ -36,7 +45,6 @@ app.get('/vaga/:id', async(req, res) => {
             vaga: row 
         });
     });
-    
 })
 
 app.get('/admin', (req,res) => {
