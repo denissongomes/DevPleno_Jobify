@@ -79,12 +79,16 @@ app.post('/admin/vagas/nova',async(req, res) => {
 
 app.get('/admin/vagas/editar/:id', async(req, res) => {
     const db = dbConnection
-    const sql  = "SELECT * FROM categorias"
-    db.all(sql, [], (err, categorias) => {    
-        res.render("admin/editar-vaga", { 
-            categorias 
-        });
-    }); 
+    const { id } = req.params
+    const sqlCategorias  =  "SELECT * FROM categorias"
+    const sqlVagas  = `SELECT * FROM vagas WHERE id='${id}'`
+    db.all(sqlCategorias, [], (err, categorias) => {  
+       db.all(sqlVagas, function(err, vaga) { 
+          res.render('admin/editar-vaga', {
+                categorias, vaga
+            })
+       })  
+    }) 
 })
 
 app.post('/admin/vagas/editar/:id',async(req, res) => {
