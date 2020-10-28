@@ -10,6 +10,8 @@ const dbConnection = new sqlite3.Database('./database.sqlite', (err) => {
 //console.log('Connected to the database.');
   });
   
+const port = process.env.PORT || 3000
+
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -21,12 +23,11 @@ app.get('/', async(req,res) => {
     db.all(sqlCategorias, [], (err, categoriasDb) => {  
         db.all(sqlVagas, function(err, vagas) { 
             const categorias = categoriasDb.map(cat => {
-                return{ 
+                return { 
                     ...cat,
                     vagas: vagas.filter( vaga => vaga.categoria === cat.id)
                 }
             })
-           console.log(categorias)
             res.render('home', {
                     categorias
             })
@@ -166,7 +167,7 @@ app.post('/admin/categorias/editar/:id',async(req, res) => {
 init()
 
 
-app.listen(3000, (err) => {
+app.listen(port, (err) => {
     if(err){
         console.log('Não foi possível iniciar o servidor')
     } else {
