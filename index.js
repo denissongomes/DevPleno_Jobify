@@ -109,13 +109,15 @@ app.get('/admin/categorias', (req,res) => {
     });  
 })
 
-
 app.get('/admin/categorias/delete/:id', async(req, res) => {
     const db =  await dbConnection
     await db.run('DELETE FROM categorias WHERE id = '+req.params.id+'')
     res.redirect('/admin/categorias')
 })
 
+app.get('/admin/categorias/nova', async(req, res) => {     
+        res.render("admin/nova-categoria");
+})
 
  const init = async() => {
    const db =  await dbConnection
