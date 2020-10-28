@@ -126,6 +126,17 @@ app.post('/admin/categorias/nova',async(req, res) => {
     res.redirect('/admin/categorias') 
 })
 
+app.get('/admin/categorias/editar/:id', async(req, res) => {
+    const db = dbConnection
+    const { id } = req.params
+    const sql  = `SELECT * FROM categorias WHERE id='${id}'`
+    db.all(sql, [], (err, categorias) => {  
+        res.render('admin/editar-categoria', {
+            categorias
+        })  
+    }) 
+})
+
  const init = async() => {
    const db =  await dbConnection
     await db.run('create table if not exists categorias (id INTEGER PRIMARY KEY, categoria TEXT);')
