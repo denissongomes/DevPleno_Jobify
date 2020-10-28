@@ -123,7 +123,7 @@ app.post('/admin/categorias/nova',async(req, res) => {
     const db =  await dbConnection
     const {categoria}  = req.body
     await db.run(`insert into categorias(categoria) values('${categoria}')`) //use temlate string (`)para adicionar variáveis à expressão sql
-    res.redirect('/admin/categorias')
+    res.redirect('/admin/categorias') 
 })
 
  const init = async() => {
